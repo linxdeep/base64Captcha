@@ -109,3 +109,13 @@ func TestDriverDigit_GenerateIdQuestionAnswer(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkDriverDigit_DrawCaptcha(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_, content, _ := DefaultDriverDigit.GenerateIdQuestionAnswer()
+		if content == "" {
+			b.Errorf("content is nil")
+		}
+		DefaultDriverDigit.DrawCaptcha(content)
+	}
+}
