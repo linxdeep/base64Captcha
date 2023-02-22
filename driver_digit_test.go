@@ -38,6 +38,7 @@ func TestDriverDigit_DrawCaptcha(t *testing.T) {
 		wantErr  bool
 	}{
 		{"Digit", fields{80, 240, 6, 0.6, 8}, args{RandText(6, TxtNumbers)}, nil, false},
+		{"Digit", fields{20, 240, 6, 0.6, 8}, args{RandText(6, TxtNumbers)}, nil, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

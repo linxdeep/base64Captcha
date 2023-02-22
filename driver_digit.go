@@ -14,9 +14,12 @@
 
 package base64Captcha
 
-import "math/rand"
+import (
+	"math"
+	"math/rand"
+)
 
-//DriverDigit config for captcha-engine-digit.
+// DriverDigit config for captcha-engine-digit.
 type DriverDigit struct {
 	// Height png height in pixel.
 	Height int
@@ -30,15 +33,15 @@ type DriverDigit struct {
 	DotCount int
 }
 
-//NewDriverDigit creates a driver of digit
+// NewDriverDigit creates a driver of digit
 func NewDriverDigit(height int, width int, length int, maxSkew float64, dotCount int) *DriverDigit {
 	return &DriverDigit{Height: height, Width: width, Length: length, MaxSkew: maxSkew, DotCount: dotCount}
 }
 
-//DefaultDriverDigit is a default driver of digit
+// DefaultDriverDigit is a default driver of digit
 var DefaultDriverDigit = NewDriverDigit(80, 240, 5, 0.7, 80)
 
-//GenerateIdQuestionAnswer creates captcha content and answer
+// GenerateIdQuestionAnswer creates captcha content and answer
 func (d *DriverDigit) GenerateIdQuestionAnswer() (id, q, a string) {
 	id = RandomId()
 	digits := randomDigits(d.Length)
@@ -46,7 +49,7 @@ func (d *DriverDigit) GenerateIdQuestionAnswer() (id, q, a string) {
 	return id, a, a
 }
 
-//DrawCaptcha creates digit captcha item
+// DrawCaptcha creates digit captcha item
 func (d *DriverDigit) DrawCaptcha(content string) (item Item, err error) {
 	// Initialize PRNG.
 	itemDigit := NewItemDigit(d.Width, d.Height, d.DotCount, d.MaxSkew)
@@ -63,8 +66,8 @@ func (d *DriverDigit) DrawCaptcha(content string) (item Item, err error) {
 	} else {
 		border = d.Width / 5
 	}
-	x := rand.Intn(maxx-border*2) + border
-	y := rand.Intn(maxy-border*2) + border
+	x := rand.Intn(int(math.Max(float64(maxx-border*2), 1))) + border
+	y := rand.Intn(int(math.Max(float64(maxy-border*2), 1))) + border
 	// Draw digits.
 	for _, n := range digits {
 		itemDigit.drawDigit(digitFontData[n], x, y)
