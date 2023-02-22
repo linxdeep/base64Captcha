@@ -1,8 +1,8 @@
-module github.com/mojocn/base64Captcha
+module github.com/linxdeep/base64Captcha
 
-go 1.16
+go 1.19
 
 require (
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
-	golang.org/x/image v0.0.0-20190501045829-6d32002ffd75
+	golang.org/x/image v0.5.0
 )

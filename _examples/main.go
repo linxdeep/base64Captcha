@@ -4,9 +4,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/mojocn/base64Captcha"
 	"log"
 	"net/http"
+
+	"github.com/linxdeep/base64Captcha"
 )
 
 //configJsonBody json request body.
